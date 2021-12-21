@@ -8,6 +8,7 @@ export default function useCreation<T>(factory: () => T, deps: DependencyList) {
     obj: undefined as undefined | T,
     initialized: false,
   })
+  // 当初始化的或者deps发生变化的时候重新计算缓存值
   if (current.initialized === false || !depsAreSame(current.deps, deps)) {
     current.deps = deps
     current.obj = factory()
