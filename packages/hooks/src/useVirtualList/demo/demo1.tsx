@@ -6,21 +6,22 @@
  * desc.zh-CN: 渲染大量数据
  */
 
-import React, { useMemo, useRef } from 'react';
-import { useVirtualList } from 'ahooks';
+import React, { useMemo, useRef } from 'react'
+import { useVirtualList } from 'ahooks'
 
 export default () => {
-  const containerRef = useRef();
-  const wrapperRef = useRef();
+  const containerRef = useRef()
+  const wrapperRef = useRef()
 
-  const originalList = useMemo(() => Array.from(Array(99999).keys()), []);
+  const originalList = useMemo(() => Array.from(Array(99999).keys()), [])
 
   const [list] = useVirtualList(originalList, {
     containerTarget: containerRef,
     wrapperTarget: wrapperRef,
     itemHeight: 60,
     overscan: 10,
-  });
+  })
+  console.log('list: ', list)
   return (
     <>
       <div ref={containerRef} style={{ height: '300px', overflow: 'auto', border: '1px solid' }}>
@@ -43,5 +44,5 @@ export default () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

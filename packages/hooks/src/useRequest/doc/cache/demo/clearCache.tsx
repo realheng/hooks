@@ -1,7 +1,7 @@
-import Mock from 'mockjs';
-import React from 'react';
-import { useRequest, clearCache, useBoolean } from 'ahooks';
-import { message } from 'antd';
+import Mock from 'mockjs'
+import React from 'react'
+import { useRequest, clearCache, useBoolean } from 'ahooks'
+import { message } from 'antd'
 
 async function getArticle(): Promise<{ data: string; time: number }> {
   return new Promise((resolve) => {
@@ -9,17 +9,17 @@ async function getArticle(): Promise<{ data: string; time: number }> {
       resolve({
         data: Mock.mock('@paragraph'),
         time: new Date().getTime(),
-      });
-    }, 3000);
-  });
+      })
+    }, 3000)
+  })
 }
 
 const Article = ({ cacheKey }) => {
   const { data, loading, refresh } = useRequest(getArticle, {
     cacheKey,
-  });
+  })
   if (!data && loading) {
-    return <p>Loading</p>;
+    return <p>Loading</p>
   }
   return (
     <>
@@ -27,17 +27,17 @@ const Article = ({ cacheKey }) => {
       <p>Latest request time: {data?.time}</p>
       <p>{data?.data}</p>
     </>
-  );
-};
+  )
+}
 
 const clear = (cacheKey?: string | string[]) => {
-  clearCache(cacheKey);
-  const tips = Array.isArray(cacheKey) ? cacheKey.join('、') : cacheKey;
-  message.success(`Clear ${tips ?? 'All'} finished`);
-};
+  clearCache(cacheKey)
+  const tips = Array.isArray(cacheKey) ? cacheKey.join('、') : cacheKey
+  message.success(`Clear ${tips ?? 'All'} finished`)
+}
 
 export default () => {
-  const [state, { toggle }] = useBoolean();
+  const [state, { toggle }] = useBoolean()
   return (
     <div>
       <p>
@@ -64,5 +64,5 @@ export default () => {
       <h2>Article 3</h2>
       {state && <Article cacheKey="Article3" />}
     </div>
-  );
-};
+  )
+}
