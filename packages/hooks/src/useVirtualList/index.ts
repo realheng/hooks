@@ -102,18 +102,9 @@ const useVirtualList = <T = any>(list: T[], options: Options<T>) => {
       const { scrollTop, clientHeight } = container
       // 根据scrollTop取得卷去部分的条目个数
       const offset = getOffset(scrollTop)
-      console.log(
-        '%c [ offset ]-105-「index.ts」',
-        'font-size:13px; background:#e6f7ff; color:#046bd9;',
-        offset,
-      )
       const visibleCount = getVisibleCount(clientHeight, offset)
-      console.log(
-        '%c [ visibleCount ]-107-「index.ts」',
-        'font-size:13px; background:#e6f7ff; color:#046bd9;',
-        visibleCount,
-      )
       // overscan是缓冲区的大小
+      // 通过offset
       const start = Math.max(0, offset - overscan)
       const end = Math.min(list.length, offset + visibleCount + overscan)
       // 中间位置的时候end-start = overscan+visibleCount+overscan
@@ -145,7 +136,6 @@ const useVirtualList = <T = any>(list: T[], options: Options<T>) => {
   useEventListener(
     'scroll',
     (e) => {
-      console.log('scroll')
       // 暂时还不知道这个ref的目的是干嘛，感觉去掉也没什么影响
       if (scrollTriggerByScrollToFunc.current) {
         scrollTriggerByScrollToFunc.current = false
