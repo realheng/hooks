@@ -15,15 +15,15 @@ export default () => {
 
   const originalList = useMemo(() => Array.from(Array(99999).keys()), [])
 
-  const [list] = useVirtualList(originalList, {
+  const [list, scrollTo] = useVirtualList(originalList, {
     containerTarget: containerRef,
     wrapperTarget: wrapperRef,
     itemHeight: 60,
     overscan: 10,
   })
-  console.log('list: ', list)
   return (
     <>
+      <button onClick={() => scrollTo(100)}>点击跳转到第100个</button>
       <div ref={containerRef} style={{ height: '300px', overflow: 'auto', border: '1px solid' }}>
         <div ref={wrapperRef}>
           {list.map((ele) => (
