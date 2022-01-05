@@ -6,22 +6,22 @@
  * desc.zh-CN: 拖拽区域可以接受文件，链接，文字，和下方的 box 节点。
  */
 
-import React, { useRef, useState } from 'react';
-import { useDrop, useDrag } from 'ahooks';
+import React, { useRef, useState } from 'react'
+import { useDrop, useDrag } from 'ahooks'
 
 const DragItem = ({ data }) => {
-  const dragRef = useRef();
+  const dragRef = useRef()
 
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false)
 
   useDrag(data, dragRef, {
     onDragStart: () => {
-      setDragging(true);
+      setDragging(true)
     },
     onDragEnd: () => {
-      setDragging(false);
+      setDragging(false)
     },
-  });
+  })
 
   return (
     <div
@@ -36,33 +36,33 @@ const DragItem = ({ data }) => {
     >
       {dragging ? 'dragging' : `box-${data}`}
     </div>
-  );
-};
+  )
+}
 
 export default () => {
-  const [isHovering, setIsHovering] = useState(false);
+  const [isHovering, setIsHovering] = useState(false)
 
-  const dropRef = useRef();
+  const dropRef = useRef()
 
   useDrop(dropRef, {
     onText: (text, e) => {
-      console.log(e);
-      alert(`'text: ${text}' dropped`);
+      console.log(e)
+      alert(`'text: ${text}' dropped`)
     },
     onFiles: (files, e) => {
-      console.log(e, files);
-      alert(`${files.length} file dropped`);
+      console.log(e, files)
+      alert(`${files.length} file dropped`)
     },
     onUri: (uri, e) => {
-      console.log(e);
-      alert(`uri: ${uri} dropped`);
+      console.log(e)
+      alert(`uri: ${uri} dropped`)
     },
     onDom: (content: string, e) => {
-      alert(`custom: ${content} dropped`);
+      alert(`custom: ${content} dropped`)
     },
     onDragEnter: () => setIsHovering(true),
     onDragLeave: () => setIsHovering(false),
-  });
+  })
 
   return (
     <div>
@@ -76,5 +76,5 @@ export default () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
