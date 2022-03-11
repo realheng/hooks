@@ -1,8 +1,8 @@
-import useLatest from '../useLatest'
-import type { BasicTarget } from '../utils/domTarget'
-import { getTargetElement } from '../utils/domTarget'
-import useEffectWithTarget from '../utils/useEffectWithTarget'
 import { useRef } from 'react'
+import useLatest from '../useLatest'
+import { getTargetElement } from '../utils/domTarget'
+import type { BasicTarget } from '../utils/domTarget'
+import useEffectWithTarget from '../utils/useEffectWithTarget'
 
 export interface Options {
   onFiles?: (files: File[], event?: React.DragEvent) => void
@@ -22,6 +22,7 @@ const useDrop = (target: BasicTarget, options: Options = {}) => {
   // https://stackoverflow.com/a/26459269
   const dragEnterTarget = useRef<any>()
 
+  // 当target和deps发生变化的时候重新执行effect函数
   useEffectWithTarget(
     () => {
       const targetElement = getTargetElement(target)

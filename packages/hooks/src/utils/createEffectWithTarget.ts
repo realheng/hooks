@@ -24,6 +24,7 @@ const createEffectWithTarget = (useEffectType: typeof useEffect | typeof useLayo
 
     const unLoadRef = useRef<any>()
 
+    // useEffect是每次重新渲染都会执行的
     useEffectType(() => {
       const targets = Array.isArray(target) ? target : [target]
       const els = targets.map((item) => getTargetElement(item))
